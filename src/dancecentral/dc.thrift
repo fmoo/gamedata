@@ -59,7 +59,7 @@ struct DanceCentralSourceSong {
   /**
    * Numerical difficulty corresponding to `difficulty`.
    */
-  11: i16 rating,
+  11: Rating rating,
   12: string release,
   13: string shortname,
   14: string sortdate,
