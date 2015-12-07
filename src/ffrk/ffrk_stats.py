@@ -1,7 +1,8 @@
 from enum import Enum
+from ffrk_utils import requests_get_html
 from collections import OrderedDict
 import lxml.etree
-from ffrk_utils import enum_names, requests_get_html
+
 
 class Stat(Enum):
     ATTACK = 'Attack'
@@ -67,25 +68,3 @@ def fetch_all(cap=Cap.LV50):
 
             allstats[k][stat.value] = v
     return allstats.values()
-
-import argparse
-ap = argparse.ArgumentParser()
-ap.add_argument('cap', choices=enum_names(Cap))
-ap.add_argument('mode', choices=['csv', 'json'])
-ns = ap.parse_args()
-
-charas = fetch_all(Cap[ns.cap])
-
-if ns.mode == 'json':
-    import json
-    print json.dumps(charas, indent=2)
-
-elif ns.mode == 'csv':
-    import StringIO
-    import csv
-
-    buf = StringIO.StringIO()
-    dw = csv.DictWriter(buf, charas[0].keys())
-    dw.writeheader()
-    dw.writerows(charas)
-    print buf.getvalue()
