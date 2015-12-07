@@ -10,7 +10,7 @@ def enum_values(cls):
     return [e.value for e in cls]
 
 def requests_get(url):
-    cachefile = 'cache/' + urllib.quote(url, '')
+    cachefile = os.path.join('cache', urllib.quote(url, ''))
     if os.path.exists(cachefile):
         with open(cachefile, mode='rb') as f:
             return f.read()
